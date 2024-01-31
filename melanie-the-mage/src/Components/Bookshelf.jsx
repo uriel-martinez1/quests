@@ -14,19 +14,32 @@ const Bookshelf = () => {
     const [books, setBooks] = useState(inventory);
 
     const sortedBookshelf = (books) => {
-        return books;
+        const sortedBooks = [...books]
+        if (!ascending) {
+            return sortedBooks.sort((a,b) => {a[sort.keyToSort].toUpperCase() < b[sort.keyToSort].toUpperCase()})
+        }
     }
 
     const handleDeletedBook = (deletedBookId) => {
-        return null;
+        const updatedBooks = books.filter((book) => book.id != deletedBookId)
+        setBooks(updatedBooks)
     }
 
     const handleEditedBook = (editedBook) => {
-        return null;
+        const updatedBooks = books.map((book) => {
+            if (book.id === editedBook.id){
+                return {
+                    ...editedBook
+                }
+            } else {
+                return book;
+            }
+        })
+        setBooks(updatedBooks)
     }
 
     const handleAddedBook = (newBook) => {
-        return null;
+        setBooks([...books, newBook]);
      }
 
     const handleSort = (header) => {

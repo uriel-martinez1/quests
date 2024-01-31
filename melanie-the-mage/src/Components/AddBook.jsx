@@ -17,7 +17,12 @@ const AddBook = ({onSubmit}) => {
     const [newBook, setNewBook] = useState(initialValues);
 
     const handleChange = (e) => {
-        return null;
+        const {name,value} = e.target;
+        setNewBook((previousState) => ({
+            ...previousState,
+            id: (newBook.id === '' ? (Math.random()*1000) : newBook.id),
+            [name]: value,
+        }))
     }
 
     const handleSubmit = (e) => {
